@@ -1,0 +1,36 @@
+{% extends 'recipesapp/base.html' %}
+
+{% block title %}Главная - Рецепты{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>Добро пожаловать на сайт рецептов!</h1>
+    
+    <p>Здесь вы найдете множество вкусных и простых рецептов для любых случаев жизни!</p>
+
+    <div class="mb-3">
+      <a href="{% url 'recipesapp:create_recipe' %}" class="btn btn-primary">Создать новый рецепт</a>
+    </div>
+
+    <h2>Популярные рецепты</h2>
+    
+    {% if recipes %}
+      <ul class="list-group">
+        {% for recipe in recipes %}
+          <li class="list-group-item">
+            <h3><a href="{% url 'recipesapp:recipe_detail' pk=recipe.pk %}">{{ recipe.name }}</a></h3>
+            <p><strong>Автор:</strong> {{ recipe.author }}</p>
+            <p><strong>Время приготовления:</strong> {{ recipe.cooking_time }} минут</p>
+            <p><strong>Категории:</strong> 
+              {% for category in recipe.categories.all %}
+                <span class="badge bg-secondary">{{ category.name }}</span>
+              {% endfor %}
+            </p>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>Нет доступных рецептов.</p>
+    {% endif %}
+  </div>
+{% endblock %}

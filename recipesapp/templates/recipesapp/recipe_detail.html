@@ -1,0 +1,57 @@
+{% extends 'recipesapp/base.html' %}
+
+{% block title %}{{ recipe.name }} - Рецепт{% endblock %}
+
+{% block content %}
+    <div class="recipe-detail">
+        <h2>{{ recipe.name }}</h2>
+
+        <p><strong>Автор:</strong> {{ recipe.author }}</p>
+
+        {% if recipe.image %}
+            <div class="recipe-image">
+                <img src="{{ recipe.image.url }}" alt="{{ recipe.name }}" class="img-fluid">
+            </div>
+        {% endif %}
+        
+        <div class="description">
+            <strong>Описание:</strong>
+            <p>{{ recipe.description }}</p>
+        </div>
+
+        <div class="cooking-steps">
+            <strong>Шаги приготовления:</strong>
+            <pre>{{ recipe.cooking_steps }}</pre>
+        </div>
+
+        <div class="cooking-time">
+            <strong>Время приготовления:</strong>
+            <p>{{ recipe.cooking_time }} минут</p>
+        </div>
+
+        <div class="ingredients">
+            <strong>Ингредиенты:</strong>
+            <pre>{{ recipe.ingredients }}</pre>
+        </div>
+
+        <div class="energy-value">
+            <strong>Энергетическая ценность:</strong>
+            <pre>{{ recipe.energy_value }}</pre>
+        </div>
+
+        <div class="categories">
+            <strong>Категории:</strong>
+            <ul>
+                {% for category in recipe.categories.all %}
+                    <li>{{ category.name }}</li>
+                {% empty %}
+                    <li>Нет категорий</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="edit-recipe">
+            <a href="{% url 'recipesapp:update_recipe' pk=recipe.pk %}" class="btn btn-primary">Редактировать рецепт</a>
+        </div>
+    </div>
+{% endblock %}

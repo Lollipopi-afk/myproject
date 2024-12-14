@@ -1,0 +1,113 @@
+{% extends 'recipesapp/base.html' %}
+
+{% block title %}Создание нового рецепта{% endblock %}
+
+{% block content %}
+  <h2>Создать новый рецепт</h2>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <div>
+        <label for="{{ form.name.id_for_label }}">Название рецепта:</label>
+        {{ form.name }}
+        {% if form.name.errors %}
+          <ul>
+            {% for error in form.name.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+    </div>
+
+    <div>
+        <label for="{{ form.description.id_for_label }}">Описание рецепта:</label>
+        {{ form.description }}
+        {% if form.description.errors %}
+          <ul>
+            {% for error in form.description.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+    </div>
+
+    <div>
+        <label for="{{ form.cooking_steps.id_for_label }}">Шаги приготовления:</label>
+        {{ form.cooking_steps }}
+        {% if form.cooking_steps.errors %}
+          <ul>
+            {% for error in form.cooking_steps.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+    </div>
+
+    <div>
+        <label for="{{ form.cooking_time.id_for_label }}">Время приготовления (мин):</label>
+        {{ form.cooking_time }}
+        {% if form.cooking_time.errors %}
+          <ul>
+            {% for error in form.cooking_time.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+    </div>
+
+    <div>
+        <label for="{{ form.ingredients.id_for_label }}">Ингредиенты:</label>
+        {{ form.ingredients }}
+        {% if form.ingredients.errors %}
+          <ul>
+            {% for error in form.ingredients.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+    </div>
+
+    <div>
+        <label for="{{ form.energy_value.id_for_label }}">Энергетическая ценность (ккал):</label>
+        {{ form.energy_value }}
+        {% if form.energy_value.errors %}
+          <ul>
+            {% for error in form.energy_value.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+    </div>
+
+    <div>
+        <label for="{{ form.categories.id_for_label }}">Категории:</label>
+        {{ form.categories }}
+        {% if form.categories.errors %}
+          <ul>
+            {% for error in form.categories.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+    </div>
+
+    <div>
+        <label for="{{ form.image.id_for_label }}">Изображение рецепта:</label>
+        {{ form.image }}
+        {% if form.image.errors %}
+          <ul>
+            {% for error in form.image.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+    </div>
+
+    <div>
+        <button type="submit">Создать рецепт</button>
+    </div>
+  </form>
+
+  <p><a href="{% url 'recipesapp:all_recipes' %}">Вернуться ко всем рецептам</a></p>
+{% endblock %}

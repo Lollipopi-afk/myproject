@@ -1,0 +1,19 @@
+{% extends 'recipesapp/base.html' %}
+
+{% block title %}Обновление рецепта{% endblock %}
+
+{% block content %}
+  <h2>Обновить рецепт: {{ object.name }}</h2>
+
+  <form method="post" enctype="multipart/form-data">  
+    {% csrf_token %}
+    {{ form.as_p }}
+    
+
+    <div>
+        <button type="submit">Обновить рецепт</button>
+    </div>
+  </form>
+
+  <p><a href="{% url 'recipesapp:recipe_detail' pk=object.pk %}">Вернуться к рецепту</a></p>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'recipesapp/base.html' %}
+
+{% block content %}
+    <h1>Все Рецепты</h1>
+    <a href="{% url 'recipesapp:create_recipe' %}" class="btn btn-primary">Создать новый рецепт</a>
+    <ul>
+        {% for recipe in recipes %}
+            <li>
+                <p>{{ recipe.name }}</p> - {{ recipe.author }}<br>
+                <span>{{ recipe.cooking_time }} минут</span><br>
+                <a href="{% url 'recipesapp:recipe_detail' pk=recipe.pk %}">Посмотреть детали</a>
+            </li>
+        {% empty %}
+            <li>Нет доступных рецептов.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
